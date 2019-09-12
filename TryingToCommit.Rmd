@@ -1,0 +1,56 @@
+---
+title: "Simple Document"
+output: html_document
+---
+
+I'm an R Markdown document! I can write whatever I want to write.
+
+# Section 1 
+
+Here's section 1 
+
+## Subsection 1.1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_ : 
+
+```{r generate_sample, message = FALSE} 
+library(tidyverse)
+
+samp = rnorm(100)
+length(samp) 
+
+plot_df = tibble(
+  x = rnorm(100),
+  y = 1 + 2 * x + rnorm(100)
+)
+```
+
+# Section 2 
+
+I can take the men of the sample, too! 
+The mean is `r mean(samp)`. 
+
+```{r}
+mean(samp) 
+```
+
+```{r named_code_chunk}
+set.seed(100)
+samp = rnorm(500, mean = 1)
+
+plot_df = tibble( 
+  x = rnorm(500, mean = 1),
+  y = c(x > 0),
+  abs_val = abs(x)
+  )
+
+plot_df
+
+ggplot(plot_df, aes(x=abs_val)) + geom_histogram()
+
+median(plot_df[[1]])
+```
+
+The median is `r median(samp)`.
+
